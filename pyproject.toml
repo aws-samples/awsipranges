@@ -5,9 +5,9 @@ description = "Work with the AWS IP address ranges in native Python."
 license = "Apache-2.0"
 authors = ["Chris Lunsford <cmluns@amazon.com>"]
 readme = "README.md"
-homepage = "https://github.com/aws-samples/awsipranges"
+homepage = "https://aws-samples.github.io/awsipranges/"
 repository = "https://github.com/aws-samples/awsipranges"
-documentation = "https://awsipranges.github.io"
+documentation = "https://aws-samples.github.io/awsipranges/"
 keywords = ["AWS", "IP", "ranges", "addresses"]
 classifiers = [
     "Intended Audience :: Developers",

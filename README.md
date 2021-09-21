@@ -66,9 +66,9 @@ Installing and upgrading `awsipranges` is easy:
 
 ## Documentation
 
-Excellent documentation is now available at: http://awsipranges.github.io/
+Excellent documentation is now available at: https://aws-samples.github.io/awsipranges/
 
-Check out the [Quickstart](http://awsipranges.github.io/quickstart.html) to dive in and begin using awsipranges.
+Check out the [Quickstart](https://aws-samples.github.io/awsipranges/quickstart.html) to dive in and begin using awsipranges.
 
 ## Contribute
 
