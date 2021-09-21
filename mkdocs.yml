@@ -3,6 +3,7 @@ site_description: Work with AWS IP address ranges in native Python
 site_url: https://awsipranges.github.io/
 site_author: Chris Lunsford <cmluns@amazon.com>
 repo_url: https://github.com/aws-samples/awsipranges/
+edit_uri: blob/main/docs/
 repo_name: GitHub
 copyright: Copyright &copy; 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
