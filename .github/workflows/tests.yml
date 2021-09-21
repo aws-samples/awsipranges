@@ -20,12 +20,15 @@ jobs:
         run: make check-style
 
   pytest-awsipranges:
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.x
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
