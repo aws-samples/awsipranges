@@ -39,3 +39,6 @@ data-tests :
 
 docker : Dockerfile requirements-dev.txt
 	docker build -t awsipranges:local ./
+
+publish-docs :
+	mkdocs gh-deploy --force
