@@ -1,0 +1,5 @@
+# Ignore everything
+**
+
+# Include specific files and directories
+!/requirements-dev.txt

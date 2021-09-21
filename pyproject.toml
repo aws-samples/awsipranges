@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "awsipranges"
+version = "0.2.3"
+description = "Work with the AWS IP address ranges in native Python."
+license = "Apache-2.0"
+authors = ["Chris Lunsford <cmluns@amazon.com>"]
+readme = "README.md"
+homepage = "https://github.com/aws-samples/awsipranges"
+repository = "https://github.com/aws-samples/awsipranges"
+documentation = "https://awsipranges.github.io"
+keywords = ["AWS", "IP", "ranges", "addresses"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Telecommunications Industry",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Internet",
+    "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+black = "^21.6b0"
+flake8 = "^3.9.2"
+ipython = "^7.25.0"
+pytest = "^6.2.4"
+pyOpenSSL = "^20.0.1"
+mkdocs = "^1.2.2"
+pymdown-extensions = "^8.2"
+mkautodoc = "^0.1.0"
+coverage = "^5.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[pytest]
+log_cli = true
+log_cli_level = 20
+
+[tool.pytest.ini_options]
+markers = [
+    "data: marks JSON data syntax and semantics tests (deselect with '-m \"not data\"')",
+    "extra_data_loading: marks extra tests that load the JSON data from the web (deselect with '-m \"not extra_data_loading\"')",
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "test_utils: marks tests as slow (deselect with '-m \"not test_utils\"')",
+]

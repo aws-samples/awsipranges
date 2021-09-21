@@ -1,0 +1,55 @@
+site_name: awsipranges
+site_description: Work with AWS IP address ranges in native Python
+site_url: https://awsipranges.github.io/
+site_author: Chris Lunsford <cmluns@amazon.com>
+repo_url: https://github.com/aws-samples/awsipranges/
+repo_name: GitHub
+copyright: Copyright &copy; 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+
+theme:
+  name: readthedocs
+  language: en
+  palette:
+    accent: amber
+  font: false # security
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+
+plugins:
+    - search
+
+extra_css:
+    - assets/styles/extra.css
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - mkautodoc
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.tilde
+  - pymdownx.emoji
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+
+use_directory_urls: false
+
+nav:
+- 'Home': index.md
+- 'Quickstart': quickstart.md
+- 'API Reference': api.md
