@@ -1,0 +1,20 @@
+name: test-aws-ip-ranges-data
+
+on:
+  schedule:
+    - cron:  '59 23 * * *'
+
+jobs:
+  test-aws-ip-ranges-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Test AWS IP ranges data
+        run: make data-tests

@@ -1,0 +1,26 @@
+name: publish-to-pypi
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-to-pypi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Install Poetry
+        run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+      - name: Install dependencies
+        run: poetry install
+      - name: Test
+        run: poetry run make test
+      - name: Build
+        run: poetry build
+      - name: Publish
+        run: |
+          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+          poetry publish
