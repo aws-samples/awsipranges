@@ -18,3 +18,17 @@ jobs:
         run: make lint
       - name: Check style
         run: make check-style
+
+  pytest-awsipranges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Test awsipranges library
+        run: make library-tests
