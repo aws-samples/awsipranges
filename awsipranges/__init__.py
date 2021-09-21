@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from awsipranges.data_loading import get_ranges
-from awsipranges.models.awsipprefix import AWSIPPrefix, AWSIPv4Prefix, AWSIPv6Prefix
-from awsipranges.models.awsipprefixes import AWSIPPrefixes
+from awsipranges.data_loading import get_ranges  # noqa: F401
+from awsipranges.models.awsipprefix import (  # noqa: F401
+    AWSIPPrefix,
+    AWSIPv4Prefix,
+    AWSIPv6Prefix,
+)
+from awsipranges.models.awsipprefixes import AWSIPPrefixes  # noqa: F401

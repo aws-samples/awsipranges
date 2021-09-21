@@ -22,7 +22,7 @@ from awsipranges.utils import check_type
 def get_json_data(
     cafile: Union[str, Path, None] = None, capath: Union[str, Path, None] = None
 ) -> Dict[str, Any]:
-    f"""Retrieve and parse the AWS IP address ranges JSON file."""
+    """Retrieve and parse the AWS IP address ranges JSON file."""
     check_type("cafile", cafile, (str, Path), optional=True)
     cafile = Path(cafile) if isinstance(cafile, str) else cafile
     if cafile and not cafile.is_file():

@@ -60,7 +60,7 @@ def normalize_to_set(
     if isinstance(value, Iterable):
         return set(value)
 
-    raise TypeError(f"The value must be a string, integer, iterable type, or None.")
+    raise TypeError("The value must be a string, integer, iterable type, or None.")
 
 
 def validate_values(

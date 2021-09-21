@@ -223,13 +223,6 @@ class AWSIPPrefixes(object):
         else:
             network = ip_network(item, strict=False)
 
-        if isinstance(network, IPv4Network):
-            prefix_set = self.ipv4_prefixes
-        elif isinstance(network, IPv6Network):
-            prefix_set = self.ipv6_prefixes
-        else:
-            raise TypeError("`network` must be an IPv4Network or IPv6Network object.")
-
         for supernet in supernets(network):
             supernet_prefix = self._get_prefix(supernet)
             if supernet_prefix:
@@ -318,13 +311,6 @@ class AWSIPPrefixes(object):
             network = item.prefix
         else:
             network = ip_network(item, strict=False)
-
-        if isinstance(network, IPv4Network):
-            prefix_set = self.ipv4_prefixes
-        elif isinstance(network, IPv6Network):
-            prefix_set = self.ipv6_prefixes
-        else:
-            raise TypeError("`network` must be an IPv4Network or IPv6Network object.")
 
         prefixes = list()
         for supernet in supernets(network):
