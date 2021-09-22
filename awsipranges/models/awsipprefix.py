@@ -109,13 +109,35 @@ class AWSIPPrefix(ABC):
         return self._prefix, self._region, self._network_border_group, self._services
 
     def __eq__(self, other) -> bool:
-        # Allow comparison between AWSIPPrefixes and Python native IPv4 and IPv6
-        # network objects.
+        """Compare for equality.
+
+        This method allows comparisons between AWSIPPrefix objects, None,
+        IPv4Network and IPv6Network objects, and strings that can be converted
+        to IPv4Network and IPv6Network objects.
+
+        **Raises:**
+
+        A `ValueError` exception if the `other` object is a string and
+        cannot be converted to an IPv4Network or IPv6Network object.
+
+        A `TypeError` if the `other` object is of an unsupported type.
+        """
+        if other is None:
+            return False
+
+        if isinstance(other, str):
+            other = ip_network(other)
+
         if isinstance(other, (IPv4Network, IPv6Network)):
             return self.prefix == other
 
-        # Compare two AWSIPPrefix objects
-        return self.__tuple == other.__tuple
+        if isinstance(other, AWSIPPrefix):
+            return self.__tuple == other.__tuple
+
+        raise TypeError(
+            f"Cannot compare an AWSIPPrefix object with an object of type"
+            f" {other!r}."
+        )
 
     def __hash__(self) -> int:
         return hash(self.__tuple)
