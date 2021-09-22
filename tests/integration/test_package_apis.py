@@ -201,13 +201,21 @@ def test_can_get_aws_ip_prefix_by_ipv6_address(aws_ip_ranges: AWSIPPrefixes):
 
 
 def test_get_unknown_ipv4_address_returns_default_value(aws_ip_ranges: AWSIPPrefixes):
-    address = random_ipv4_address()
+    while True:
+        address = random_ipv4_address()
+        if address not in aws_ip_ranges:
+            break
+
     assert aws_ip_ranges.get(address, default="default") == "default"
     assert aws_ip_ranges.get(str(address), default="default") == "default"
 
 
 def test_get_unknown_ipv6_address_returns_default_value(aws_ip_ranges: AWSIPPrefixes):
-    address = random_ipv6_address()
+    while True:
+        address = random_ipv6_address()
+        if address not in aws_ip_ranges:
+            break
+
     assert aws_ip_ranges.get(address, default="default") == "default"
     assert aws_ip_ranges.get(str(address), default="default") == "default"
 
