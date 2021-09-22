@@ -9,7 +9,7 @@ To get started, make sure you have:
 
 Then dive-in with this QuickStart to start using the AWS IP address ranges as native Python objects!
 
-## Verify the TLS certificate of the Amazon IP ranges server
+## Verify server TLS certificates
 
 *How do I know that I am working with the authentic and latest AWS IP address ranges?*
 
@@ -23,17 +23,19 @@ To verify the TLS certificate presented by the Amazon IP ranges server (ip-range
 
 1. Download the Amazon Root CA certificates (in PEM format) from the [Amazon Trust Services Repository](https://www.amazontrust.com/repository/).
 
-2. To prepare the certificates for use, you can either:
+2. Prepare the certificates for use by either:
 
-    - Stack (concatenate) the files into a single certificate bundle (single file)
+    - Stacking (concatenating) the files into a single certificate bundle (single file)
 
-    - Or, store them in a directory using the OpenSSL hash filename format. You can do this with the [`c_rehash` script](https://www.openssl.org/docs/man1.1.0/man1/rehash.html) included in many OpenSSL distributions:
+    - Storing them in a directory using the OpenSSL hash filenames
+
+        You can do this with the [`c_rehash` script](https://www.openssl.org/docs/man1.1.0/man1/rehash.html) included in many OpenSSL distributions:
 
         ```shell
         ❯ c_rehash amazon_root_certificates/
         ```
 
-    > ***Tip***: See `tests/unit/test_data_loading.py` in the `awsipranges` repository for sample Python functions that download the Amazon Root CA certificates and prepare the certificates as both a stacked certificate bundle file and as a directory with OpenSSL hash filenames.
+  > ***Tip***: See [`tests/unit/test_data_loading.py`](https://github.com/aws-samples/awsipranges/blob/main/tests/unit/test_data_loading.py) in the `awsipranges` repository for sample Python functions that download the Amazon Root CA certificates and prepare the certificates as both a stacked certificate bundle file and as a directory with OpenSSL hash filenames.
 
 3. Pass the path to the prepared certificates to the `awsipranges.get_ranges()` function using the `cafile` or `capath` parameters:
 
@@ -60,9 +62,9 @@ One line of code (okay, two if you count the import statement) is all it takes t
 >>> aws_ip_ranges = awsipranges.get_ranges()
 ```
 
-The [`awsipranges.get_ranges()`](./api.md#get_ranges) function returns an [`AWSIPPrefixes`](./api.md#awsipprefixes) object. An `AWSIPPrefixes` object is a collection of AWS IP prefixes.
+The [`awsipranges.get_ranges()`](./api.md#get_ranges) function returns an [`AWSIPPrefixes`](./api.md#awsipprefixes) object, which is a structured collection of AWS IP prefixes.
 
-You can access the `create_date` and `sync_token` attributes to check the version of the downloaded JSON file:
+You can access the `create_date` and `sync_token` attributes of the `AWSIPPrefixes` collection to check the version of the downloaded JSON file:
 
 ```python
 >>> aws_ip_ranges.create_date
@@ -95,7 +97,7 @@ Out[7]:
 
 ...and if that's all this library did, it would be pretty boring.
 
-## Check if an IP address or network is contained in the AWS IP address ranges
+## Check an IP address or network
 
 *How can I check to see if an IP address or network is contained in the AWS IP address ranges?*
 
@@ -104,13 +106,22 @@ Out[7]:
 ```python
 >>> '52.94.5.15' in aws_ip_ranges
 True
+
+>>> '43.195.173.0/24' in aws_ip_ranges
+True
+
+>>> IPv4Network('13.50.0.0/16') in aws_ip_ranges
+True
+
+>>> '1.1.1.1' in aws_ip_ranges
+False
 ```
 
-## Get the AWS IP prefix that contains an IP address or network
+## Find an AWS IP prefix
 
-*How can I get the AWS IP prefix that contains an IP address or network?*
+*How can I find the AWS IP prefix that contains an IP address or network?*
 
-You can get the IP the longest-match prefix that contains an IP address or network by indexing into the `AWSIPPrefixes` collection or using the `get()` method just like you do with a Python dictionary:
+You can get the longest-match prefix that contains an IP address or network by indexing into the `AWSIPPrefixes` collection or using the `get()` method just like you do with a Python dictionary:
 
 ```python
 >>> aws_ip_ranges['52.94.5.15']
@@ -118,9 +129,12 @@ AWSIPv4Prefix('52.94.5.0/24', region='eu-west-1', network_border_group='eu-west-
 
 >>> aws_ip_ranges.get('52.94.5.15')
 AWSIPv4Prefix('52.94.5.0/24', region='eu-west-1', network_border_group='eu-west-1', services=('AMAZON', 'DYNAMODB'))
+
+>>> aws_ip_ranges.get('1.1.1.1', default='Nope')
+'Nope'
 ```
 
-The AWS IP address ranges contain supernet and subnet prefixes, so an IP address or network may be contained in more than one AWS IP prefix. Use the `get_prefix_and_supernets()` method to retrieve all the IP prefixes that contain an IP address or network:
+The AWS IP address ranges contain supernet and subnet prefixes, so an IP address or network may be contained in more than one AWS IP prefix. Use the `get_prefix_and_supernets()` method to retrieve all IP prefixes that contain an IP address or network:
 
 ```python
 >>> aws_ip_ranges.get_prefix_and_supernets('3.218.180.73')
@@ -133,11 +147,11 @@ The AWS IP address ranges contain supernet and subnet prefixes, so an IP address
 
 *How can I filter the AWS IP prefixes by Region, network border group, or service?*
 
-The `filter(...)` method allows you to select a subset of AWS IP prefixes from the collection. You can filter on the `regions`, `network_border_groups`, IP `versions` (4, 6), and `services` contained in the collection. The `filter()` method returns a new `AWSIPPrefixes` object that contains the subset of IP prefixes that match your filter criteria.
+The `filter()` method allows you to select a subset of AWS IP prefixes from the collection. You can filter on `regions`, `network_border_groups`, IP `versions` (4, 6), and `services`. The `filter()` method returns a new `AWSIPPrefixes` object that contains the subset of IP prefixes that match your filter criteria.
 
-You can pass a single value (`regions='eu-central-2'`) or a sequence of values (`regions=['eu-central-1', 'eu-central-2']`) to the `regions=`, `network_border_groups=`, and `services=` parameters. The `filter()` method will return the prefixes that match all the provided parameters; with the each prefix's value for the parameter contained in the provided sequence of values.
+You may pass a single value (`regions='eu-central-2'`) or a sequence of values (`regions=['eu-central-1', 'eu-central-2']`) to the filter parameters. The `filter()` method will return the prefixes that match all the provided parameters; selecting prefixes where the prefix's attributes are contained in the provided set of values.
 
-For example, `filter(regions=['eu-central-1', 'eu-central-2'], services='EC2', versions=4)` would select all IP version `4` prefixes that that have `EC2` in the list of services and are in the `eu-central-1` or `eu-central-2` Regions.
+For example, `filter(regions=['eu-central-1', 'eu-central-2'], services='EC2', versions=4)` will select all IP version `4` prefixes that have `EC2` in the prefix's list of services and are in the `eu-central-1` or `eu-central-2` Regions.
 
 ```python
 >>> aws_ip_ranges.filter(regions='eu-central-2', services='EC2', versions=4)
@@ -177,11 +191,11 @@ frozenset({'AMAZON',
            'WORKSPACES_GATEWAYS'})
 ```
 
-## Work with AWSIPv4Prefix and AWSIPv6Prefix objects
+## Work with AWS IP prefix objects
 
 *My router/firewall wants IP networks in a net-mask or host-mask format. Do the AWS IP prefix objects provide a way for me to get the prefix in the format I need?*
 
-[`AWSIPv4Prefix`](./api.md#awsipv4prefix) and [`AWSIPv6Prefix`](./api.md#awsipv6prefix) objects are proxies around [`IPv4Network`](https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network) and [`IPv6Network`](https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network) objects from the Python standard library (see the [`ipaddress`](https://docs.python.org/3/library/ipaddress.html) module). They support all the attributes and methods available on the `IPv4Network` and `IPv6Network` objects. They also inherit additional attributes (like `region`, `network_border_group`, and `services`) and additional functionality from an [`AWSIPPrefix`](./api.md#awsipprefix) abstract base class. 
+[`AWSIPv4Prefix`](./api.md#awsipv4prefix) and [`AWSIPv6Prefix`](./api.md#awsipv6prefix) objects are proxies around [`IPv4Network`](https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network) and [`IPv6Network`](https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network) objects from the Python standard library (see the [`ipaddress`](https://docs.python.org/3/library/ipaddress.html) module). They support all the attributes and methods available on the `IPv4Network` and `IPv6Network` objects. They also inherit additional attributes (like `region`, `network_border_group`, and `services`) and additional functionality from the [`AWSIPPrefix`](./api.md#awsipprefix) base class. 
 
 Combining the functionality provided by the standard library objects with the rich collection capabilities provided by the `awsipranges` library allows you to complete what could be a complex task easily:
 
@@ -210,7 +224,7 @@ permit tcp any 52.95.169.0 0.0.0.255 eq 443
 permit tcp any 52.95.170.0 0.0.1.255 eq 443
 ```
 
-These are only a couple possibilities. Python and `awsipranges` allow you use the AWS IP ranges in your automation scripts to accomplish powerful tasks simply.
+These are only a couple possibilities. Python and `awsipranges` allow you to use the AWS IP ranges in your automation scripts to accomplish powerful tasks simply.
 
 ## What about IPv6?
 

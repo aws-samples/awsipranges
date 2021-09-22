@@ -58,10 +58,10 @@ def get_ranges(cafile: Path = None, capath: Path = None) -> AWSIPPrefixes:
     The optional `cafile` and `capath` parameters may be used to specify a set
     of trusted CA certificates for the HTTPS request. `cafile` should point to a
     single file containing a bundle of CA certificates, whereas `capath`
-    should point to a directory of hashed certificate files. To verify the TLS
-    certificate against Amazon root certificates, download the CA certificates
-    (in PEM format) from Amazon Trust Services and provide the path to the
-    certificate(s) using the `cafile` or `capath` parameters.
+    should point to a directory of certificate files with OpenSSL hash filenames.
+    To verify the TLS certificate against Amazon root certificates, download the
+    CA certificates (in PEM format) from Amazon Trust Services and provide the
+    path to the certificate(s) using the `cafile` or `capath` parameters.
 
     See the OpenSSL [SSL_CTX_load_verify_locations](https://www.openssl.org/docs/man1.1.0/man3/SSL_CTX_set_default_verify_dir.html)
     documentation for details on the expected CAfile and CApath file formats.

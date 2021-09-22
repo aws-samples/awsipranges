@@ -115,8 +115,8 @@ class AWSIPPrefixes(object):
     def syncToken(self) -> str:  # noqa
         """The publication time, in Unix epoch time format.
 
-        A convenience attribute to maintain API compatibility with the JSON
-        attribute names.
+        This is a convenience attribute to maintain API compatibility with the
+        JSON attribute names.
         """
         return self._sync_token
 
@@ -129,8 +129,8 @@ class AWSIPPrefixes(object):
     def createDate(self) -> datetime:  # noqa
         """The publication date and time, in UTC.
 
-        A convenience attribute to maintain API compatibility with the JSON
-        attribute names.
+        This is a convenience attribute to maintain API compatibility with the
+        JSON attribute names.
         """
         return self._create_date
 
@@ -143,8 +143,8 @@ class AWSIPPrefixes(object):
     def prefixes(self) -> Tuple[AWSIPv4Prefix, ...]:
         """The IPv4 prefixes in the collection.
 
-        A convenience attribute to maintain API compatibility with the JSON
-        attribute names.
+        This is a convenience attribute to maintain API compatibility with the
+        JSON attribute names.
         """
         return self._ipv4_prefixes
 

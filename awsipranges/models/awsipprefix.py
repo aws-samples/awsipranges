@@ -300,8 +300,8 @@ class AWSIPv4Prefix(AWSIPPrefix):
     def ip_prefix(self) -> IPv4Network:
         """The public IPv4 network prefix.
 
-        A convenience attribute to maintain API compatibility with the JSON
-        attribute names.
+        This is a convenience attribute to maintain API compatibility with the
+        JSON attribute names.
         """
         return self._prefix
 
@@ -352,8 +352,8 @@ class AWSIPv6Prefix(AWSIPPrefix):
     def ipv6_prefix(self) -> IPv6Network:
         """The public IPv6 network prefix.
 
-        A convenience attribute to maintain API compatibility with the JSON
-        attribute names.
+        This is a convenience attribute to maintain API compatibility with the
+        JSON attribute names.
         """
         return self._prefix
 
