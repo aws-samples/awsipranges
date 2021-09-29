@@ -26,13 +26,13 @@ check-style :
 	black --check .
 
 tests :
-	pytest
+	pytest --cov=./awsipranges/
 
 fast-tests :
-	pytest -m "not data and not extra_data_loading and not slow and not test_utils"
+	pytest --cov=./awsipranges/ -m "not data and not extra_data_loading and not slow and not test_utils"
 
 library-tests :
-	pytest -m "not data"
+	pytest --cov=./awsipranges/ -m "not data"
 
 data-tests :
 	pytest -m "data"

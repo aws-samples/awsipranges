@@ -37,6 +37,7 @@ mkdocs = "^1.2.2"
 pymdown-extensions = "^8.2"
 mkautodoc = "^0.1.0"
 coverage = "^5.5"
+pytest-cov = "^2.12.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
