@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "awsipranges"
-version = "0.2.5"
+version = "0.2.6"
 description = "Work with the AWS IP address ranges in native Python."
 license = "Apache-2.0"
 authors = ["Chris Lunsford <cmluns@amazon.com>"]
