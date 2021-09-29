@@ -2,6 +2,12 @@
 
 *Work with the AWS IP address ranges in native Python.*
 
+[![License](https://img.shields.io/github/license/aws-samples/awsipranges)](https://github.com/aws-samples/awsipranges/blob/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/awsipranges.svg)](https://pypi.org/project/awsipranges/)
+[![Code Coverage](https://img.shields.io/codecov/c/github/aws-samples/awsipranges)](https://app.codecov.io/github/aws-samples/awsipranges/)
+[![Build](https://img.shields.io/github/workflow/status/aws-samples/awsipranges/tests)](https://github.com/aws-samples/awsipranges/actions/workflows/tests.yml)
+[![Docs](https://img.shields.io/github/workflow/status/aws-samples/awsipranges/publish-docs?label=docs)](https://aws-samples.github.io/awsipranges/)
+
 ---
 
 Amazon Web Services (AWS) publishes its [current IP address ranges](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html) in [JSON](https://ip-ranges.amazonaws.com/ip-ranges.json) format. Python v3 provides an [ipaddress](https://docs.python.org/3/library/ipaddress.html) module in the standard library that allows you to create, manipulate, and perform operations on IPv4 and IPv6 addresses and networks. Wouldn't it be nice if you could work with the AWS IP address ranges like native Python objects?
