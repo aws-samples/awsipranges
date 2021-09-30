@@ -3,17 +3,19 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+import hashlib
 import json
 import urllib.request
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Tuple, Union
 
 from awsipranges.config import (
     AWS_IP_ADDRESS_RANGES_URL,
     CREATE_DATE_FORMAT,
     CREATE_DATE_TIMEZONE,
 )
+from awsipranges.exceptions import raise_for_status
 from awsipranges.models.awsipprefix import aws_ip_prefix
 from awsipranges.models.awsipprefixes import AWSIPPrefixes
 from awsipranges.utils import check_type
@@ -21,7 +23,7 @@ from awsipranges.utils import check_type
 
 def get_json_data(
     cafile: Union[str, Path, None] = None, capath: Union[str, Path, None] = None
-) -> Dict[str, Any]:
+) -> Tuple[Dict[str, Any], Optional[str]]:
     """Retrieve and parse the AWS IP address ranges JSON file."""
     check_type("cafile", cafile, (str, Path), optional=True)
     cafile = Path(cafile) if isinstance(cafile, str) else cafile
@@ -38,8 +40,19 @@ def get_json_data(
     with urllib.request.urlopen(
         AWS_IP_ADDRESS_RANGES_URL, cafile=cafile, capath=capath
     ) as response:
-        response_data = json.load(response)
-    return response_data
+        raise_for_status(response)
+
+        response_bytes = response.read()
+        response_data = json.loads(response_bytes)
+
+        if "md5" in hashlib.algorithms_available:
+            md5_hash = hashlib.md5()
+            md5_hash.update(response_bytes)
+            md5_hex_digest = md5_hash.hexdigest()
+        else:
+            md5_hex_digest = None
+
+    return response_data, md5_hex_digest
 
 
 def get_ranges(cafile: Path = None, capath: Path = None) -> AWSIPPrefixes:
@@ -78,7 +91,7 @@ def get_ranges(cafile: Path = None, capath: Path = None) -> AWSIPPrefixes:
 
     The AWS IP address ranges in a `AWSIPPrefixes` collection.
     """
-    json_data = get_json_data(cafile=cafile, capath=capath)
+    json_data, json_md5 = get_json_data(cafile=cafile, capath=capath)
 
     assert "syncToken" in json_data
     assert "createDate" in json_data
@@ -92,4 +105,5 @@ def get_ranges(cafile: Path = None, capath: Path = None) -> AWSIPPrefixes:
         ).replace(tzinfo=CREATE_DATE_TIMEZONE),
         ipv4_prefixes=(aws_ip_prefix(record) for record in json_data["prefixes"]),
         ipv6_prefixes=(aws_ip_prefix(record) for record in json_data["ipv6_prefixes"]),
+        md5=json_md5,
     )

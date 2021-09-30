@@ -35,6 +35,7 @@ class AWSIPPrefixes(object):
     _create_date: Optional[datetime]
     _ipv4_prefixes: Tuple[AWSIPv4Prefix, ...]
     _ipv6_prefixes: Tuple[AWSIPv6Prefix, ...]
+    _md5: Optional[str]
 
     _regions: Optional[FrozenSet[str]] = None
     _network_border_groups: Optional[FrozenSet[str]] = None
@@ -46,6 +47,7 @@ class AWSIPPrefixes(object):
         create_date: Optional[datetime] = None,
         ipv4_prefixes: Iterable[AWSIPv4Prefix] = None,
         ipv6_prefixes: Iterable[AWSIPv6Prefix] = None,
+        md5: Optional[str] = None,
     ) -> None:
         super().__init__()
 
@@ -53,11 +55,13 @@ class AWSIPPrefixes(object):
         check_type("create_date", create_date, datetime, optional=True)
         check_type("ipv4_prefixes", ipv4_prefixes, Iterable)
         check_type("ipv6_prefixes", ipv6_prefixes, Iterable)
+        check_type("md5", md5, str, optional=True)
 
         self._sync_token = sync_token
         self._create_date = create_date
         self._ipv4_prefixes = self._process_prefixes(ipv4_prefixes)
         self._ipv6_prefixes = self._process_prefixes(ipv6_prefixes)
+        self._md5 = md5
 
     @staticmethod
     def _process_prefixes(
@@ -153,6 +157,15 @@ class AWSIPPrefixes(object):
         """The IPv6 prefixes in the collection."""
         return self._ipv6_prefixes
 
+    @property
+    def md5(self) -> Optional[str]:
+        """The MD5 cryptographic hash value of the ip-ranges.json file.
+
+        You can use this value to check whether the downloaded file is
+        corrupted.
+        """
+        return self._md5
+
     def __repr__(self) -> str:
         return pprint.pformat(
             {
@@ -160,6 +173,7 @@ class AWSIPPrefixes(object):
                 "create_date": self.create_date,
                 "ipv4_prefixes": self.ipv4_prefixes,
                 "ipv6_prefixes": self.ipv6_prefixes,
+                "md5": self.md5,
             }
         )
 

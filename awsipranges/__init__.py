@@ -15,6 +15,7 @@
 # limitations under the License.
 
 from awsipranges.data_loading import get_ranges  # noqa: F401
+from awsipranges.exceptions import AWSIPRangesException, HTTPError  # noqa: F401
 from awsipranges.models.awsipprefix import (  # noqa: F401
     AWSIPPrefix,
     AWSIPv4Prefix,
