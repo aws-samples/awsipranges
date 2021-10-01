@@ -42,6 +42,12 @@ def test_sync_token_is_opaque_string(aws_ip_ranges: AWSIPPrefixes):
     assert len(aws_ip_ranges.sync_token) > 0
 
 
+def test_md5_is_hexadecimal_string(aws_ip_ranges: AWSIPPrefixes):
+    assert isinstance(aws_ip_ranges.md5, str)
+    assert len(aws_ip_ranges.md5) > 0
+    assert int(aws_ip_ranges.md5, 16) > 0
+
+
 def test_ipv4_prefixes_are_aws_ip4_prefixes(aws_ip_ranges: AWSIPPrefixes):
     for prefix in aws_ip_ranges.ipv4_prefixes:
         assert isinstance(prefix, AWSIPv4Prefix)
