@@ -161,8 +161,7 @@ class AWSIPPrefixes(object):
     def md5(self) -> Optional[str]:
         """The MD5 cryptographic hash value of the ip-ranges.json file.
 
-        You can use this value to check whether the downloaded file is
-        corrupted.
+        You can use this value to verify the integrity of the downloaded file.
         """
         return self._md5
 
@@ -261,23 +260,23 @@ class AWSIPPrefixes(object):
         ],
         default=None,
     ) -> Union[AWSIPv4Prefix, AWSIPv6Prefix]:
-        """Get the AWS IP address prefix that contains the IPv4 or IPv6 item.
+        """Get the AWS IP address prefix that contains the IPv4 or IPv6 key.
 
-        Returns the longest-match prefix that contains the provided item or the
-        value of the `default=` parameter if the item is not found in the
+        Returns the longest-match prefix that contains the provided key or the
+        value of the `default=` parameter if the key is not found in the
         collection.
 
         **Parameters:**
 
-        - **item** (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
-          IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the item
-          to retrieve from the collection
-        - **default** - the value to return if the item is not found in the
+        - **key** (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
+          IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the IP
+          address or network to retrieve from the collection
+        - **default** - the value to return if the key is not found in the
           collection
 
         **Returns:**
 
-        The `AWSIPv4Prefix` or `AWSIPv6Prefix` that contains the provided `item`.
+        The `AWSIPv4Prefix` or `AWSIPv6Prefix` that contains the provided key.
         """
         try:
             return self[key]
@@ -286,7 +285,7 @@ class AWSIPPrefixes(object):
 
     def get_prefix_and_supernets(
         self,
-        item: Union[
+        key: Union[
             str,
             IPv4Address,
             IPv6Address,
@@ -299,32 +298,32 @@ class AWSIPPrefixes(object):
         ],
         default=None,
     ) -> Optional[Tuple[Union[AWSIPv4Prefix, AWSIPv6Prefix], ...]]:
-        """Get the prefix and supernets that contain the IPv4 or IPv6 item.
+        """Get the prefix and supernets that contain the IPv4 or IPv6 key.
 
         Returns a tuple that contains the longest-match prefix and supernets
-        that contains the provided or the value of the `default=` parameter if
-        the item is not found in the collection.
+        that contains the provided key or the value of the `default=` parameter
+        if the key is not found in the collection.
 
         The tuple is sorted by prefix length in ascending order (shorter prefixes
         come before longer prefixes).
 
         **Parameters:**
 
-        - **item** (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
-          IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the item
-          to retrieve from the collection
-        - **default** - the value to return if the item is not found in the
+        - **key** (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
+          IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the IP
+          address or network to retrieve from the collection
+        - **default** - the value to return if the key is not found in the
           collection
 
         **Returns:**
 
         A tuple of the `AWSIPv4Prefix`es or `AWSIPv6Prefix`es that contains the
-        provided `item`.
+        provided key.
         """
-        if isinstance(item, (AWSIPv4Prefix, AWSIPv6Prefix)):
-            network = item.prefix
+        if isinstance(key, (AWSIPv4Prefix, AWSIPv6Prefix)):
+            network = key.prefix
         else:
-            network = ip_network(item, strict=False)
+            network = ip_network(key, strict=False)
 
         prefixes = list()
         for supernet in supernets(network):
