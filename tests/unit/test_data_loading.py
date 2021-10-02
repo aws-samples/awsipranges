@@ -121,15 +121,21 @@ def capath(
 
 # Happy path tests
 def test_get_json_data():
-    json_data = get_json_data()
+    json_data, json_md5 = get_json_data()
     assert isinstance(json_data, dict)
+    assert isinstance(json_md5, str)
+    assert json_md5
 
 
 def test_get_json_data_with_cafile(cafile: Path):
-    json_data = get_json_data(cafile=cafile)
+    json_data, json_md5 = get_json_data(cafile=cafile)
     assert isinstance(json_data, dict)
+    assert isinstance(json_md5, str)
+    assert json_md5
 
 
 def test_get_json_data_with_capath(capath: Path):
-    json_data = get_json_data(capath=capath)
+    json_data, json_md5 = get_json_data(capath=capath)
     assert isinstance(json_data, dict)
+    assert isinstance(json_md5, str)
+    assert json_md5
