@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Chris Lunsford <cmluns@amazon.com>">
+  <link rel="canonical" href="https://aws-samples.github.io/awsipranges/api.html">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>API Reference - awsipranges</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="assets/styles/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "API Reference";
+    var mkdocs_page_input_path = "api.md";
+    var mkdocs_page_url = "/awsipranges/api.html";
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> awsipranges</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="api.html">API Reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#get_ranges">get_ranges()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#awsipprefixes">AWSIPPrefixes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#awsipprefix">AWSIPPrefix</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#awsipv4prefix">AWSIPv4Prefix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#awsipv6prefix">AWSIPv6Prefix</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">awsipranges</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/aws-samples/awsipranges/blob/main/docs/api.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="developer-interfaces">Developer Interfaces<a class="headerlink" href="#developer-interfaces" title="Permanent link">&para;</a></h1>
+<p>All public interfaces and classes are exposed under the main <code>awsipranges</code>
+package.</p>
+<h2 id="get_ranges">get_ranges()<a class="headerlink" href="#get_ranges" title="Permanent link">&para;</a></h2>
+<div class="autodoc">
+<div class="autodoc-signature"><code>awsipranges.<strong>get_ranges</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">cafile=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">capath=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the AWS IP address ranges from the published JSON document.</p>
+<p>It is your responsibility to verify the TLS certificate presented by the
+server. By default, the Python
+<a href="https://docs.python.org/3/library/urllib.html">urllib</a> module (used by
+this function) verifies the TLS certificate presented by the server against
+the system-provided certificate datastore.</p>
+<p>You can download the Amazon root CA certificates from the
+<a href="https://www.amazontrust.com/repository/">Amazon Trust Services</a>
+repository.</p>
+<p>The optional <code>cafile</code> and <code>capath</code> parameters may be used to specify a set
+of trusted CA certificates for the HTTPS request. <code>cafile</code> should point to a
+single file containing a bundle of CA certificates, whereas <code>capath</code>
+should point to a directory of certificate files with OpenSSL hash filenames.
+To verify the TLS certificate against Amazon root certificates, download the
+CA certificates (in PEM format) from Amazon Trust Services and provide the
+path to the certificate(s) using the <code>cafile</code> or <code>capath</code> parameters.</p>
+<p>See the OpenSSL <a href="https://www.openssl.org/docs/man1.1.0/man3/SSL_CTX_set_default_verify_dir.html">SSL_CTX_load_verify_locations</a>
+documentation for details on the expected CAfile and CApath file formats.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li>
+<p><strong>cafile</strong> (<em>optional</em> Path) - path to a file of stacked (concatenated) CA
+  certificates in PEM format</p>
+</li>
+<li>
+<p><strong>capath</strong> (<em>optional</em> Path) - path to a directory containing one or more
+  certificates in PEM format using the OpenSSL subject-name-hash filenames</p>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The AWS IP address ranges in a <code>AWSIPPrefixes</code> collection.</p></div>
+</div>
+<h2 id="awsipprefixes">AWSIPPrefixes<a class="headerlink" href="#awsipprefixes" title="Permanent link">&para;</a></h2>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>awsipranges.<strong>AWSIPPrefixes</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">sync_token=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">create_date=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ipv4_prefixes=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ipv6_prefixes=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">md5=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>A collection of AWS IP address prefixes.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>createDate</strong></code></div>
+<div class="autodoc-docstring"><p>The publication date and time, in UTC.</p>
+<p>This is a convenience attribute to maintain API compatibility with the
+JSON attribute names.</p></div>
+<div class="autodoc-signature"><code><strong>create_date</strong></code></div>
+<div class="autodoc-docstring"><p>The publication date and time, in UTC.</p></div>
+<div class="autodoc-signature"><code><strong>filter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">regions=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">network_border_groups=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">services=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">versions=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Filter the AWS IP address ranges.</p>
+<p>The service <code>"AMAZON"</code> is not a service but rather an identifier used
+to get all IP address ranges - meaning that every prefix is contained in
+the subset of prefixes tagged with the <code>"AMAZON"</code> service. Some IP
+address ranges are only tagged with the <code>"AMAZON"</code> service.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>regions</strong> (<em>optional</em> str or iterable sequence of strings) - the
+  AWS Regions to include in the subset</li>
+<li><strong>network_border_groups</strong> (<em>optional</em> str or iterable sequence of
+  strings) - the AWS network border groups to include in the subset</li>
+<li><strong>services</strong> (<em>optional</em> str or iterable sequence of strings) - the
+  AWS services to include in the subset</li>
+<li><strong>versions</strong> (<em>optional</em> int) - the IP address version (4, 6) to
+  include in the subset</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A new <code>AWSIPPrefixes</code> object that contains the subset of IP prefixes that
+match your filter criteria.</p></div>
+<div class="autodoc-signature"><code><strong>get</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">default=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the AWS IP address prefix that contains the IPv4 or IPv6 key.</p>
+<p>Returns the longest-match prefix that contains the provided key or the
+value of the <code>default=</code> parameter if the key is not found in the
+collection.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>key</strong> (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
+  IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the IP
+  address or network to retrieve from the collection</li>
+<li><strong>default</strong> - the value to return if the key is not found in the
+  collection</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The <code>AWSIPv4Prefix</code> or <code>AWSIPv6Prefix</code> that contains the provided key.</p></div>
+<div class="autodoc-signature"><code><strong>get_prefix_and_supernets</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">default=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the prefix and supernets that contain the IPv4 or IPv6 key.</p>
+<p>Returns a tuple that contains the longest-match prefix and supernets
+that contains the provided key or the value of the <code>default=</code> parameter
+if the key is not found in the collection.</p>
+<p>The tuple is sorted by prefix length in ascending order (shorter prefixes
+come before longer prefixes).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>key</strong> (str, IPv4Address, IPv6Address, IPv4Network, IPv6Network,
+  IPv4Interface, IPv6Interface, AWSIPv4Prefix, AWSIPv6Prefix) - the IP
+  address or network to retrieve from the collection</li>
+<li><strong>default</strong> - the value to return if the key is not found in the
+  collection</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A tuple of the <code>AWSIPv4Prefix</code>es or <code>AWSIPv6Prefix</code>es that contains the
+provided key.</p></div>
+<div class="autodoc-signature"><code><strong>ipv4_prefixes</strong></code></div>
+<div class="autodoc-docstring"><p>The IPv4 prefixes in the collection.</p></div>
+<div class="autodoc-signature"><code><strong>ipv6_prefixes</strong></code></div>
+<div class="autodoc-docstring"><p>The IPv6 prefixes in the collection.</p></div>
+<div class="autodoc-signature"><code><strong>md5</strong></code></div>
+<div class="autodoc-docstring"><p>The MD5 cryptographic hash value of the ip-ranges.json file.</p>
+<p>You can use this value to verify the integrity of the downloaded file.</p></div>
+<div class="autodoc-signature"><code><strong>network_border_groups</strong></code></div>
+<div class="autodoc-docstring"><p>The set of network border groups in the collection.</p></div>
+<div class="autodoc-signature"><code><strong>prefixes</strong></code></div>
+<div class="autodoc-docstring"><p>The IPv4 prefixes in the collection.</p>
+<p>This is a convenience attribute to maintain API compatibility with the
+JSON attribute names.</p></div>
+<div class="autodoc-signature"><code><strong>regions</strong></code></div>
+<div class="autodoc-docstring"><p>The set of regions in the collection.</p></div>
+<div class="autodoc-signature"><code><strong>services</strong></code></div>
+<div class="autodoc-docstring"><p>The set of services in the collection.</p>
+<p>The service <code>"AMAZON"</code> is not a service but rather an identifier used
+to get all IP address ranges - meaning that every prefix is contained in
+the subset of prefixes tagged with the <code>"AMAZON"</code> service. Some IP
+address ranges are only tagged with the <code>"AMAZON"</code> service.</p></div>
+<div class="autodoc-signature"><code><strong>syncToken</strong></code></div>
+<div class="autodoc-docstring"><p>The publication time, in Unix epoch time format.</p>
+<p>This is a convenience attribute to maintain API compatibility with the
+JSON attribute names.</p></div>
+<div class="autodoc-signature"><code><strong>sync_token</strong></code></div>
+<div class="autodoc-docstring"><p>The publication time, in Unix epoch time format.</p></div>
+</div>
+</div>
+<h2 id="awsipprefix">AWSIPPrefix<a class="headerlink" href="#awsipprefix" title="Permanent link">&para;</a></h2>
+<p>Base class for the <code>AWSIPv4Prefix</code> and <code>AWSIPv6Prefix</code> classes. <code>AWSIPPrefix</code> objects are <em>immutable</em> and <em>hashable</em> and therefore may be added to Python sets and be used as keys in dictionaries.</p>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>awsipranges.<strong>AWSIPPrefix</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">prefix</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">region</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">network_border_group</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">services</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>AWS IP Prefix.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>hostmask</strong></code></div>
+<div class="autodoc-docstring"><p>The host mask (aka. wildcard mask), as an IP Address object.</p></div>
+<div class="autodoc-signature"><code><strong>netmask</strong></code></div>
+<div class="autodoc-docstring"><p>The net mask, as an IP Address object.</p></div>
+<div class="autodoc-signature"><code><strong>network_address</strong></code></div>
+<div class="autodoc-docstring"><p>The network address for the network.</p></div>
+<div class="autodoc-signature"><code><strong>network_border_group</strong></code></div>
+<div class="autodoc-docstring"><p>The name of the network border group.</p>
+<p>A network border group is a unique set of Availability Zones or Local
+Zones from where AWS advertises IP addresses.</p></div>
+<div class="autodoc-signature"><code><strong>num_addresses</strong></code></div>
+<div class="autodoc-docstring"><p>The total number of addresses in the network.</p></div>
+<div class="autodoc-signature"><code><strong>prefix</strong></code></div>
+<div class="autodoc-docstring"><p>The public IP network prefix.</p></div>
+<div class="autodoc-signature"><code><strong>prefixlen</strong></code></div>
+<div class="autodoc-docstring"><p>Length of the network prefix, in bits.</p></div>
+<div class="autodoc-signature"><code><strong>region</strong></code></div>
+<div class="autodoc-docstring"><p>The AWS Region or <code>GLOBAL</code> for edge locations.</p>
+<p>The <code>CLOUDFRONT</code> and <code>ROUTE53</code> ranges are GLOBAL.</p></div>
+<div class="autodoc-signature"><code><strong>services</strong></code></div>
+<div class="autodoc-docstring"><p>Services that use IP addresses in this IP prefix.</p>
+<p>The addresses listed for <code>API_GATEWAY</code> are egress only.</p>
+<p>The service <code>"AMAZON"</code> is not a service but rather an identifier used
+to get all IP address ranges - meaning that every prefix is contained in
+the subset of prefixes tagged with the <code>"AMAZON"</code> service. Some IP
+address ranges are only tagged with the <code>"AMAZON"</code> service.</p></div>
+<div class="autodoc-signature"><code><strong>version</strong></code></div>
+<div class="autodoc-docstring"><p>The IP version (4, 6).</p></div>
+<div class="autodoc-signature"><code><strong>with_hostmask</strong></code></div>
+<div class="autodoc-docstring"><p>A string representation of the network, with the mask in host mask notation.</p></div>
+<div class="autodoc-signature"><code><strong>with_netmask</strong></code></div>
+<div class="autodoc-docstring"><p>A string representation of the network, with the mask in net mask notation.</p></div>
+<div class="autodoc-signature"><code><strong>with_prefixlen</strong></code></div>
+<div class="autodoc-docstring"><p>A string representation of the IP prefix, in network/prefix notation.</p></div>
+</div>
+</div>
+<h3 id="awsipv4prefix">AWSIPv4Prefix<a class="headerlink" href="#awsipv4prefix" title="Permanent link">&para;</a></h3>
+<p>Supports all the properties and methods of the <a href="api.html#awsipprefix"><code>AWSIPPrefix</code></a> base class and the Python native <a href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network"><code>IPv4Network</code></a> class.</p>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>awsipranges.<strong>AWSIPv4Prefix</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">prefix</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">region</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">network_border_group</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">services</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>AWS IPv4 Prefix.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>ip_prefix</strong></code></div>
+<div class="autodoc-docstring"><p>The public IPv4 network prefix.</p>
+<p>This is a convenience attribute to maintain API compatibility with the
+JSON attribute names.</p></div>
+</div>
+</div>
+<h3 id="awsipv6prefix">AWSIPv6Prefix<a class="headerlink" href="#awsipv6prefix" title="Permanent link">&para;</a></h3>
+<p>Supports all the properties and methods of the <a href="api.html#awsipprefix"><code>AWSIPPrefix</code></a> base class and the Python native <a href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network"><code>IPv6Network</code></a> class.</p>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>awsipranges.<strong>AWSIPv6Prefix</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">prefix</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">region</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">network_border_group</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">services</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>AWS IPv6 Prefix.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>ipv6_prefix</strong></code></div>
+<div class="autodoc-docstring"><p>The public IPv6 network prefix.</p>
+<p>This is a convenience attribute to maintain API compatibility with the
+JSON attribute names.</p></div>
+</div>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral" title="Quickstart"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/aws-samples/awsipranges/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="quickstart.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

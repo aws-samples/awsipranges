@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Chris Lunsford <cmluns@amazon.com>">
+  <link rel="canonical" href="https://aws-samples.github.io/awsipranges/quickstart.html">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Quickstart - awsipranges</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="assets/styles/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Quickstart";
+    var mkdocs_page_input_path = "quickstart.md";
+    var mkdocs_page_url = "/awsipranges/quickstart.html";
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> awsipranges</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="quickstart.html">Quickstart</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#verify-server-tls-certificates">Verify server TLS certificates</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#download-aws-ip-address-ranges">Download AWS IP address ranges</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#check-an-ip-address-or-network">Check an IP address or network</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#find-an-aws-ip-prefix">Find an AWS IP prefix</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#filter-aws-ip-prefixes">Filter AWS IP prefixes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#work-with-aws-ip-prefix-objects">Work with AWS IP prefix objects</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-about-ipv6">What about IPv6?</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">awsipranges</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Quickstart</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/aws-samples/awsipranges/blob/main/docs/quickstart.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h1>
+<p><code>awsipranges</code> helps you answer simple questions fast and makes it easy for you to leverage the AWS IP range data in your Python automation scripts and infrastructure configurations.</p>
+<p>To get started, make sure you have:</p>
+<ul>
+<li><code>awsipranges</code> <a href="index.html#installation">installed</a></li>
+<li><code>awsipranges</code> <a href="index.html#installation">upgraded to the latest version</a></li>
+</ul>
+<p>Then dive-in with this Quickstart to begin working with the AWS IP address ranges as native Python objects!</p>
+<h2 id="verify-server-tls-certificates">Verify server TLS certificates<a class="headerlink" href="#verify-server-tls-certificates" title="Permanent link">&para;</a></h2>
+<p><em>How do I know that I am working with the authentic and latest AWS IP address ranges?</em></p>
+<p>By default, if you do not provide trusted certificates, the Python <a href="https://docs.python.org/3/library/urllib.html">urllib</a> module (used by the <code>awsipranges.get_ranges()</code> function) verifies the TLS certificate presented by the server against the system-provided certificate datastore.</p>
+<p>It is your responsibility to verify the TLS certificate presented by the server. <code>awsipranges</code> downloads the latest AWS IP address ranges from the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html">published JSON file</a> and makes it easy for you to verify the authenticity of the TLS certificate presented by the server.</p>
+<p>Amazon publishes their root Certificate Authority (CA) certificates in the <a href="https://www.amazontrust.com/repository/">Amazon Trust Services Repository</a>.</p>
+<p>To verify the TLS certificate presented by the Amazon IP ranges server (ip-ranges.amazonaws.com):</p>
+<ol>
+<li>
+<p>Download the Amazon Root CA certificates (in PEM format) from the <a href="https://www.amazontrust.com/repository/">Amazon Trust Services Repository</a>.</p>
+</li>
+<li>
+<p>Prepare the certificates for use by either:</p>
+<ul>
+<li>
+<p>Stacking (concatenating) the files into a single certificate bundle (single file)</p>
+</li>
+<li>
+<p>Storing them in a directory using OpenSSL hash filenames</p>
+</li>
+</ul>
+<p>You can do this with the <a href="https://www.openssl.org/docs/man1.1.0/man1/rehash.html"><code>c_rehash</code> script</a> included in many OpenSSL distributions:</p>
+<div class="highlight"><pre><span></span><code>❯ c_rehash amazon_root_certificates/
+</code></pre></div>
+<blockquote>
+<p><strong><em>Tip</em></strong>: See <a href="https://github.com/aws-samples/awsipranges/blob/main/tests/unit/test_data_loading.py"><code>tests/unit/test_data_loading.py</code></a> in the <code>awsipranges</code> repository for sample Python functions that download the Amazon Root CA certificates and prepare the certificates as both a stacked certificate bundle file and as a directory with OpenSSL hash filenames.</p>
+</blockquote>
+</li>
+<li>
+<p>Pass the path to the prepared certificates to the <code>awsipranges.get_ranges()</code> function using the <code>cafile</code> or <code>capath</code> parameters:</p>
+<ul>
+<li>
+<p><code>cafile=</code> path to the stacked certificate bundle file</p>
+</li>
+<li>
+<p><code>capath=</code> path to the directory containing the certificates with OpenSSL hashed filenames</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">awsipranges</span>
+
+<span class="c1"># Using a stacked certificate bundle</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span> <span class="o">=</span> <span class="n">awsipranges</span><span class="o">.</span><span class="n">get_ranges</span><span class="p">(</span><span class="n">cafile</span><span class="o">=</span><span class="s2">&quot;amazon_root_certificates.pem&quot;</span><span class="p">)</span>
+
+<span class="c1"># Using directory containing the certificates with OpenSSL hashed filenames</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span> <span class="o">=</span> <span class="n">awsipranges</span><span class="o">.</span><span class="n">get_ranges</span><span class="p">(</span><span class="n">capath</span><span class="o">=</span><span class="s2">&quot;amazon_root_certificates/&quot;</span><span class="p">)</span>
+</code></pre></div>
+</li>
+</ol>
+<h2 id="download-aws-ip-address-ranges">Download AWS IP address ranges<a class="headerlink" href="#download-aws-ip-address-ranges" title="Permanent link">&para;</a></h2>
+<p>One line of code (okay, two if you count the import statement) is all it takes to download and parse the AWS IP address ranges into a pythonic data structure:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">awsipranges</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span> <span class="o">=</span> <span class="n">awsipranges</span><span class="o">.</span><span class="n">get_ranges</span><span class="p">()</span>
+</code></pre></div>
+<p>The <a href="api.html#get_ranges"><code>awsipranges.get_ranges()</code></a> function returns an <a href="api.html#awsipprefixes"><code>AWSIPPrefixes</code></a> object, which is a structured collection of AWS IP prefixes.</p>
+<p>You can access the <code>create_date</code> and <code>sync_token</code> attributes of the <code>AWSIPPrefixes</code> collection to check the version of the downloaded JSON file and verify the integrity of the file with the <code>md5</code> attribute:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">create_date</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">sync_token</span>
+<span class="s1">&#39;1633105993&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">md5</span>
+<span class="s1">&#39;59e4cd7f4757a9f380c626d772a5eef2&#39;</span>
+</code></pre></div>
+<p>You can access the IPv4 and IPv6 address prefixes with the <code>ipv4_prefixes</code> and <code>ipv6_prefixes</code> attributes:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">ipv4_prefixes</span>
+<span class="p">(</span><span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.0.0.0/15&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.0.5.32/29&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;EC2_INSTANCE_CONNECT&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.0.5.224/27&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ROUTE53_RESOLVER&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.2.0.0/24&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;us-east-1-iah-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.2.2.0/24&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;us-east-1-mia-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+ <span class="o">...</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">ipv6_prefixes</span>
+<span class="p">(</span><span class="n">AWSIPv6Prefix</span><span class="p">(</span><span class="s1">&#39;2400:6500:0:9::1/128&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv6Prefix</span><span class="p">(</span><span class="s1">&#39;2400:6500:0:9::2/128&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv6Prefix</span><span class="p">(</span><span class="s1">&#39;2400:6500:0:9::3/128&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv6Prefix</span><span class="p">(</span><span class="s1">&#39;2400:6500:0:9::4/128&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-3&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv6Prefix</span><span class="p">(</span><span class="s1">&#39;2400:6500:0:7000::/56&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;ap-southeast-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,)),</span>
+ <span class="o">...</span><span class="p">)</span>
+</code></pre></div>
+<p>...and if that's all this library did, it would be pretty boring.</p>
+<h2 id="check-an-ip-address-or-network">Check an IP address or network<a class="headerlink" href="#check-an-ip-address-or-network" title="Permanent link">&para;</a></h2>
+<p><em>How can I check to see if an IP address or network is contained in the AWS IP address ranges?</em></p>
+<p><a href="api.html#awsipprefixes"><code>AWSIPPrefixes</code></a> works like a standard python collection. You can check to see if an IP address, interface, or network is contained in the collection by using the Python <code>in</code> operator:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;52.94.5.15&#39;</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span>
+<span class="kc">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;43.195.173.0/24&#39;</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span>
+<span class="kc">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">IPv4Network</span><span class="p">(</span><span class="s1">&#39;13.50.0.0/16&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span>
+<span class="kc">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;1.1.1.1&#39;</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span>
+<span class="kc">False</span>
+</code></pre></div>
+<h2 id="find-an-aws-ip-prefix">Find an AWS IP prefix<a class="headerlink" href="#find-an-aws-ip-prefix" title="Permanent link">&para;</a></h2>
+<p><em>How can I find the AWS IP prefix that contains an IP address or network?</em></p>
+<p>You can get the longest-match prefix that contains an IP address or network by indexing into the <code>AWSIPPrefixes</code> collection or using the <code>get()</code> method just like you do with a Python dictionary:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="p">[</span><span class="s1">&#39;52.94.5.15&#39;</span><span class="p">]</span>
+<span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;52.94.5.0/24&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-west-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-west-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;DYNAMODB&#39;</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;52.94.5.15&#39;</span><span class="p">)</span>
+<span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;52.94.5.0/24&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-west-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-west-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;DYNAMODB&#39;</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.1.1.1&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;Nope&#39;</span><span class="p">)</span>
+<span class="s1">&#39;Nope&#39;</span>
+</code></pre></div>
+<p>The AWS IP address ranges contain supernet and subnet prefixes, so an IP address or network may be contained in more than one AWS IP prefix. Use the <code>get_prefix_and_supernets()</code> method to retrieve all IP prefixes that contain an IP address or network:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">get_prefix_and_supernets</span><span class="p">(</span><span class="s1">&#39;3.218.180.73&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.208.0.0/12&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.218.180.0/22&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;DYNAMODB&#39;</span><span class="p">,)),</span>
+ <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.218.180.0/25&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;DYNAMODB&#39;</span><span class="p">,)))</span>
+</code></pre></div>
+<h2 id="filter-aws-ip-prefixes">Filter AWS IP prefixes<a class="headerlink" href="#filter-aws-ip-prefixes" title="Permanent link">&para;</a></h2>
+<p><em>How can I filter the AWS IP prefixes by Region, network border group, or service?</em></p>
+<p>The <code>filter()</code> method allows you to select a subset of AWS IP prefixes from the collection. You can filter on <code>regions</code>, <code>network_border_groups</code>, IP <code>versions</code> (4, 6), and <code>services</code>. The <code>filter()</code> method returns a new <code>AWSIPPrefixes</code> object that contains the subset of IP prefixes that match your filter criteria.</p>
+<p>You may pass a single value (<code>regions='eu-central-2'</code>) or a sequence of values (<code>regions=['eu-central-1', 'eu-central-2']</code>) to the filter parameters. The <code>filter()</code> method returns the prefixes that match all the provided parameters; selecting prefixes where the prefix's attributes intersect the provided set of values.</p>
+<p>For example, <code>filter(regions=['eu-central-1', 'eu-central-2'], services='EC2', versions=4)</code> will select all IP version <code>4</code> prefixes that have <code>EC2</code> in the prefix's list of services and are in the <code>eu-central-1</code> or <code>eu-central-2</code> Regions.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regions</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="s1">&#39;EC2&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;create_date&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">),</span>
+ <span class="s1">&#39;ipv4_prefixes&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;3.5.52.0/22&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">,</span> <span class="s1">&#39;S3&#39;</span><span class="p">)),</span>
+                   <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;16.62.0.0/15&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+                   <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;52.94.250.0/28&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">)),</span>
+                   <span class="n">AWSIPv4Prefix</span><span class="p">(</span><span class="s1">&#39;99.151.80.0/21&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">network_border_group</span><span class="o">=</span><span class="s1">&#39;eu-central-2&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span> <span class="s1">&#39;EC2&#39;</span><span class="p">))),</span>
+ <span class="s1">&#39;ipv6_prefixes&#39;</span><span class="p">:</span> <span class="p">(),</span>
+ <span class="s1">&#39;sync_token&#39;</span><span class="p">:</span> <span class="s1">&#39;1631814194&#39;</span><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong><em>Tip</em></strong>: You can view the set of all regions, network border groups, and services contained in an <code>AWSIPPrefixes</code> collection with the <code>regions</code>, <code>network_border_groups</code>, and <code>services</code> attributes.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">services</span>
+<span class="nb">frozenset</span><span class="p">({</span><span class="s1">&#39;AMAZON&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;AMAZON_APPFLOW&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;AMAZON_CONNECT&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;API_GATEWAY&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CHIME_MEETINGS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CHIME_VOICECONNECTOR&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CLOUD9&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CLOUDFRONT&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CODEBUILD&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DYNAMODB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;EBS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;EC2&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;EC2_INSTANCE_CONNECT&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;GLOBALACCELERATOR&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;KINESIS_VIDEO_STREAMS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ROUTE53&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ROUTE53_HEALTHCHECKS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ROUTE53_HEALTHCHECKS_PUBLISHING&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ROUTE53_RESOLVER&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;S3&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;WORKSPACES_GATEWAYS&#39;</span><span class="p">})</span>
+</code></pre></div>
+<h2 id="work-with-aws-ip-prefix-objects">Work with AWS IP prefix objects<a class="headerlink" href="#work-with-aws-ip-prefix-objects" title="Permanent link">&para;</a></h2>
+<p><em>My router/firewall wants IP networks in a net-mask or host-mask format. Do the AWS IP prefix objects provide a way for me to get the prefix in the format I need?</em></p>
+<p><a href="api.html#awsipv4prefix"><code>AWSIPv4Prefix</code></a> and <a href="api.html#awsipv6prefix"><code>AWSIPv6Prefix</code></a> objects are proxies around <a href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network"><code>IPv4Network</code></a> and <a href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network"><code>IPv6Network</code></a> objects from the Python standard library (see the <a href="https://docs.python.org/3/library/ipaddress.html"><code>ipaddress</code></a> module). They support all the attributes and methods available on the <code>IPv4Network</code> and <code>IPv6Network</code> objects. They also inherit additional attributes (like <code>region</code>, <code>network_border_group</code>, and <code>services</code>) and additional functionality from the <a href="api.html#awsipprefix"><code>AWSIPPrefix</code></a> base class.</p>
+<p>Combining the functionality provided by the standard library objects with the rich collection capabilities provided by the <code>awsipranges</code> library allows you to complete complex tasks easily:</p>
+<p>Like adding routes to the <code>DYNAMODB</code> prefixes in the <code>eu-west-1</code> Region to a router:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regions</span><span class="o">=</span><span class="s1">&#39;eu-west-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="s1">&#39;DYNAMODB&#39;</span><span class="p">):</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ip route </span><span class="si">{</span><span class="n">prefix</span><span class="o">.</span><span class="n">network_address</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">prefix</span><span class="o">.</span><span class="n">netmask</span><span class="si">}</span><span class="s2"> 1.1.1.1&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">ip</span> <span class="n">route</span> <span class="mf">52.94.5.0</span> <span class="mf">255.255.255.0</span> <span class="mf">1.1.1.1</span>
+<span class="n">ip</span> <span class="n">route</span> <span class="mf">52.94.24.0</span> <span class="mf">255.255.254.0</span> <span class="mf">1.1.1.1</span>
+<span class="n">ip</span> <span class="n">route</span> <span class="mf">52.94.26.0</span> <span class="mf">255.255.254.0</span> <span class="mf">1.1.1.1</span>
+<span class="n">ip</span> <span class="n">route</span> <span class="mf">52.119.240.0</span> <span class="mf">255.255.248.0</span> <span class="mf">1.1.1.1</span>
+</code></pre></div>
+<p>Or, configuring an access control list to allow traffic to the <code>S3</code> prefixes in <code>eu-north-1</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">aws_ip_ranges</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regions</span><span class="o">=</span><span class="s1">&#39;eu-north-1&#39;</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="s1">&#39;S3&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;permit tcp any </span><span class="si">{</span><span class="n">prefix</span><span class="o">.</span><span class="n">network_address</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">prefix</span><span class="o">.</span><span class="n">hostmask</span><span class="si">}</span><span class="s2"> eq 443&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">permit</span> <span class="n">tcp</span> <span class="nb">any</span> <span class="mf">3.5.216.0</span> <span class="mf">0.0.3.255</span> <span class="n">eq</span> <span class="mi">443</span>
+<span class="n">permit</span> <span class="n">tcp</span> <span class="nb">any</span> <span class="mf">13.51.71.176</span> <span class="mf">0.0.0.15</span> <span class="n">eq</span> <span class="mi">443</span>
+<span class="n">permit</span> <span class="n">tcp</span> <span class="nb">any</span> <span class="mf">13.51.71.192</span> <span class="mf">0.0.0.15</span> <span class="n">eq</span> <span class="mi">443</span>
+<span class="n">permit</span> <span class="n">tcp</span> <span class="nb">any</span> <span class="mf">52.95.169.0</span> <span class="mf">0.0.0.255</span> <span class="n">eq</span> <span class="mi">443</span>
+<span class="n">permit</span> <span class="n">tcp</span> <span class="nb">any</span> <span class="mf">52.95.170.0</span> <span class="mf">0.0.1.255</span> <span class="n">eq</span> <span class="mi">443</span>
+</code></pre></div>
+<p>These are only a couple possibilities. Python and <code>awsipranges</code> allow you to use the AWS IP ranges in your automation scripts to accomplish powerful tasks simply.</p>
+<h2 id="what-about-ipv6">What about IPv6?<a class="headerlink" href="#what-about-ipv6" title="Permanent link">&para;</a></h2>
+<p>All the functionality and examples shown in this Quickstart also work with IPv6 prefixes! 😎</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/aws-samples/awsipranges/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="api.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
